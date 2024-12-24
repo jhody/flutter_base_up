@@ -11,10 +11,15 @@ void main() async{
   if (!kIsWeb) {
     FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   }
+  //Para q se refreje en las URL
+  GoRouter.optionURLReflectsImperativeAPIs = true;
+
   // Start app
   registerSingletons();
 
   runApp(MyApp());
+  await appLogic.bootstrap();
+
   if (!kIsWeb) {
     FlutterNativeSplash.remove();
   }
@@ -26,10 +31,13 @@ class MyApp extends StatelessWidget with GetItMixin{
   @override
   Widget build(BuildContext context) {
     final locale = watchX((SettingsLogic s) => s.currentLocale);
-    return MaterialApp(
+    return MaterialApp.router(
+      routeInformationProvider: appRouter.routeInformationProvider,
+      routeInformationParser: appRouter.routeInformationParser,
       title: 'Flutter Demo',
       locale: locale == null ? null : Locale(locale),//locale: Locale('es'), // Establecer español como idioma predeterminado
       debugShowCheckedModeBanner: false,
+      routerDelegate: appRouter.routerDelegate,
       localizationsDelegates: [
         AppLocalizations.delegate,    // El delegado de las traducciones generadas
         GlobalMaterialLocalizations.delegate,
@@ -39,12 +47,14 @@ class MyApp extends StatelessWidget with GetItMixin{
       supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(fontFamily: $styles.text.body.fontFamily, useMaterial3: true),
       color: $styles.colors.black,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      //home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 /// Crear singletons (logica y servicios) that can be shared across the app.
 void registerSingletons(){
+  // Top level app controller
+  GetIt.I.registerLazySingleton<AppLogic>(() => AppLogic());
   // Settings
   GetIt.I.registerLazySingleton<SettingsLogic>(() => SettingsLogic());
   // Localizations
@@ -52,6 +62,7 @@ void registerSingletons(){
 }
 
 
+AppLogic get appLogic => GetIt.I.get<AppLogic>();
 LocaleLogic get localeLogic => GetIt.I.get<LocaleLogic>();
 SettingsLogic get settingsLogic => GetIt.I.get<SettingsLogic>();
 

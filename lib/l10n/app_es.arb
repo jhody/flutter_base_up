@@ -1,4 +1,6 @@
 {
     "appName": "FlutterBaseUp",
-	"appBarTitleWelcome": "Bienvenido(a)"
+	"appBarTitleWelcome": "Bienvenido(a)",
+	"pageNotFoundBackButton": "Regresar al Menú",
+	"pageNotFoundMessage": "La página que estas buscando no existe."
 }
