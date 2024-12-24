@@ -1,12 +1,22 @@
-import 'package:flutter/material.dart';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:yleon/common_libs.dart';
 
-void main() {
+void main() async{
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  if (!kIsWeb) {
+    FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  }
+  // Start app
+  registerSingletons();
+
   runApp(MyApp());
+  if (!kIsWeb) {
+    FlutterNativeSplash.remove();
+  }
 }
 
 class MyApp extends StatelessWidget with GetItMixin{
@@ -18,6 +28,7 @@ class MyApp extends StatelessWidget with GetItMixin{
     return MaterialApp(
       title: 'Flutter Demo',
       locale: locale == null ? null : Locale(locale),//locale: Locale('es'), // Establecer español como idioma predeterminado
+      debugShowCheckedModeBanner: false,
       localizationsDelegates: [
         AppLocalizations.delegate,    // El delegado de las traducciones generadas
         GlobalMaterialLocalizations.delegate,

@@ -56,4 +56,23 @@ verificar que se haya crear el archivo app_localizations.dart en la ruta:
     .dart_tool/flutter_gen/gen_l10n/
 ```
 
+## Personalizar spash screen de inicio
 
+    Agregar flutter_native_splash: ^2.3.3 
+
+crear archivo flutter_native_splash.yaml y copiar el contenido
+
+Importar en el main.dart:
+
+```dart
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+```
+
+Para que compile correctamente sin errores, en android/settings.gradle modificar a:
+```
+plugins {
+    id "dev.flutter.flutter-plugin-loader" version "1.0.0"
+    id "com.android.application" version "8.2.1" apply false
+    id "org.jetbrains.kotlin.android" version "1.9.10" apply false
+}
+```
