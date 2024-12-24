@@ -26,3 +26,34 @@ A continuación general los iconos para cada plataforma con el comando
 ```bash
     flutter pub run flutter_launcher_icons
 ```
+## Configurar localización
+
+En pubspec.yaml:
+```dart
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.19.0  # Asegúrate de tener la última versión
+```
+
+Crear el archivo: l10n.yaml y agregar:
+
+```dart
+    arb-dir: lib/l10n
+    template-arb-file: app_es.arb
+    output-localization-file: app_localizations.dart
+```
+
+luego ejecutar:
+
+```bash
+flutter gen-l10n
+```
+verificar que se haya crear el archivo app_localizations.dart en la ruta:
+```
+    .dart_tool/flutter_gen/gen_l10n/
+```
+
+

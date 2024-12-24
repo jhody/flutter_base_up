@@ -14,7 +14,7 @@ flutter_launcher_icons:
 
   web:
     generate: true
-    image_path: "assets/marketing/app-icon-1024.png"
+    image_path: "assets/marketing/app-icon-512.png"
     background_color: "#hexcode"
     theme_color: "#hexcode"
 
