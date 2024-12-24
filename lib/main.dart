@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:yleon/logic/locale_logic.dart';
 import 'package:yleon/common_libs.dart';
 
 void main() async{
@@ -35,14 +36,9 @@ class MyApp extends StatelessWidget with GetItMixin{
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: [
-        Locale('en', ''),  // Soporte para inglés
-        Locale('es', ''),  // Soporte para español
-      ],
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      supportedLocales: AppLocalizations.supportedLocales,
+      theme: ThemeData(fontFamily: $styles.text.body.fontFamily, useMaterial3: true),
+      color: $styles.colors.black,
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -51,8 +47,18 @@ class MyApp extends StatelessWidget with GetItMixin{
 void registerSingletons(){
   // Settings
   GetIt.I.registerLazySingleton<SettingsLogic>(() => SettingsLogic());
+  // Localizations
+  GetIt.I.registerLazySingleton<LocaleLogic>(() => LocaleLogic());
 }
+
+
+LocaleLogic get localeLogic => GetIt.I.get<LocaleLogic>();
 SettingsLogic get settingsLogic => GetIt.I.get<SettingsLogic>();
+
+
+/// Global helpers for readability
+AppLocalizations get $strings => localeLogic.strings;
+AppStyle get $styles => WondersAppScaffold.style;
 
 
 class MyHomePage extends StatefulWidget {
