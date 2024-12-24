@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:yleon/common_libs.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatelessWidget with GetItMixin{
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final locale = watchX((SettingsLogic s) => s.currentLocale);
     return MaterialApp(
       title: 'Flutter Demo',
+      locale: locale == null ? null : Locale(locale),//locale: Locale('es'), // Establecer español como idioma predeterminado
       localizationsDelegates: [
         AppLocalizations.delegate,    // El delegado de las traducciones generadas
         GlobalMaterialLocalizations.delegate,
@@ -24,7 +28,6 @@ class MyApp extends StatelessWidget {
         Locale('en', ''),  // Soporte para inglés
         Locale('es', ''),  // Soporte para español
       ],
-      locale: Locale('es'),  // Establecer español como idioma predeterminado
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -33,19 +36,16 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+/// Crear singletons (logica y servicios) that can be shared across the app.
+void registerSingletons(){
+  // Settings
+  GetIt.I.registerLazySingleton<SettingsLogic>(() => SettingsLogic());
+}
+SettingsLogic get settingsLogic => GetIt.I.get<SettingsLogic>();
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
 
   @override
@@ -57,36 +57,18 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
       _counter++;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -105,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }
