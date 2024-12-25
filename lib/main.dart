@@ -5,6 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:yleon/logic/locale_logic.dart';
 import 'package:yleon/common_libs.dart';
+import 'package:yleon/logic/wonders_logic.dart';
 
 void main() async{
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -53,6 +54,8 @@ class MyApp extends StatelessWidget with GetItMixin{
 }
 /// Crear singletons (logica y servicios) that can be shared across the app.
 void registerSingletons(){
+  // Wonders
+  GetIt.I.registerLazySingleton<WondersLogic>(() => WondersLogic());
   // Top level app controller
   GetIt.I.registerLazySingleton<AppLogic>(() => AppLogic());
   // Settings
@@ -63,6 +66,7 @@ void registerSingletons(){
 
 
 AppLogic get appLogic => GetIt.I.get<AppLogic>();
+WondersLogic get wondersLogic => GetIt.I.get<WondersLogic>();
 LocaleLogic get localeLogic => GetIt.I.get<LocaleLogic>();
 SettingsLogic get settingsLogic => GetIt.I.get<SettingsLogic>();
 

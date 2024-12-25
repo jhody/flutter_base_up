@@ -3,13 +3,13 @@ import 'package:yleon/common_libs.dart';
 extension WonderColorExtensions on WonderType {
   Color get bgColor {
     return switch (this) {
-      WonderType.general => const Color(0xFF16184D),
+      WonderType.yhody_wonder1 => const Color(0xFF16184D),
     };
   }
 
   Color get fgColor {
     return switch (this) {
-      WonderType.general => const Color(0xFF4AA39D),
+      WonderType.yhody_wonder1 => const Color(0xFF4AA39D),
     };
   }
 }

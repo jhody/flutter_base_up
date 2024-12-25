@@ -18,7 +18,7 @@ class SettingsLogic with ThrottledSaveLoadMixin {
     currentLocale.value = value.languageCode;
     await localeLogic.loadIfChanged(value);
     // Re-init controllers that have some cached data that is localized
-    //wondersLogic.init();
+    wondersLogic.init();
     //timelineLogic.init();
   }
 

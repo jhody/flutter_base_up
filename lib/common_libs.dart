@@ -1,4 +1,7 @@
 
+export 'dart:math';
+
+export 'package:collection/collection.dart';
 export 'package:flutter/services.dart';
 export 'package:extra_alignments/extra_alignments.dart';
 export 'package:flutter/material.dart';
@@ -18,3 +21,6 @@ export 'package:yleon/ui/app_scaffold.dart';
 export 'package:gap/gap.dart';
 export 'package:yleon/ui/common/controls/buttons.dart';
 export 'package:yleon/ui/common/controls/circle_buttons.dart';
+export 'package:rnd/rnd.dart';
+export 'package:flextras/flextras.dart';
+export 'package:provider/provider.dart';

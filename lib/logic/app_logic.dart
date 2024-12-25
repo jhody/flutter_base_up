@@ -5,6 +5,7 @@ import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:flutter/foundation.dart';
 import 'package:yleon/common_libs.dart';
 import 'package:yleon/logic/common/platform_info.dart';
+import 'package:yleon/ui/common/utils/page_routes.dart';
 class AppLogic {
   /// Indicates to the rest of the app that bootstrap has not completed.
   /// The router will use this to prevent redirects while bootstrapping.
@@ -39,6 +40,9 @@ class AppLogic {
     
     //Iniciando Localizations
     await localeLogic.load();
+
+    // Wonders Data
+    wondersLogic.init();
     
     // Flag bootStrap as complete
     isBootstrapComplete = true;
@@ -52,6 +56,11 @@ class AppLogic {
      
   }
  
+  Future<T?> showFullscreenDialogRoute<T>(BuildContext context, Widget child, {bool transparent = false}) async {
+    return await Navigator.of(context).push<T>(
+      PageRoutes.dialog<T>(child, duration: $styles.times.pageTransition),
+    );
+  }
   
 }
  
