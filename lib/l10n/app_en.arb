@@ -2,5 +2,20 @@
     "appName": "FlutterBaseUp",
 	"appBarTitleWelcome": "Welcome",
 	"pageNotFoundBackButton": "Back to Menu",
-	"pageNotFoundMessage": "The page you are looking for does not exist."
+	"pageNotFoundMessage": "The page you are looking for does not exist.",
+	"appPageDefaultTitlePage": "page",
+	"appPageSemanticSwipe": "{pageTitle} {count} of {total}.",
+	"@appPageSemanticSwipe": {"placeholders": {"pageTitle": {}, "total": {}, "count": {}}},
+	"circleButtonsSemanticClose": "close",
+	"circleButtonsSemanticBack": "back",
+	"introTitleJourney": "Journey to the past",
+	"introDescriptionNavigate": "Navigate the intersection of time, art, and culture.",
+	"introTitleExplore": "Explore places",
+	"introDescriptionUncover": "Uncover remarkable human-made structures from around the world.",
+	"introTitleDiscover": "Discover artifacts",
+	"introDescriptionLearn": "Learn about cultures throughout time by examining things they left behind.",
+	"introSemanticNavigate": "Navigate",
+	"introSemanticSwipeLeft": "Swipe left to continue",
+	"introSemanticEnterApp": "Enter the app",
+	"introSemanticWonderous": "Wonderous"
 }
